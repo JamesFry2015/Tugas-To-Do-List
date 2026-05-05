@@ -1,25 +1,31 @@
 import json
-
-DB_FILE = 'tasks.json'
+# Mengimpor show_task agar pengguna bisa melihat list sebelum menghapus
+from features.show_task import show_task
 
 def delete_task(tasks):
+    # Memanggil fitur show_task untuk referensi indeks visual bagi pengguna
+    show_task(tasks)
+    
+    # Jika database kosong, hentikan eksekusi
     if not tasks:
-        print("Belum ada task yang bisa dihapus.")
         return
 
-    for idx, task in enumerate(tasks):
-        print(f"{idx + 1}. {task.get('task')} - {task.get('assignee')} [{task.get('status')}]")
-
     try:
-        nomor = int(input("Pilih nomor task yang ingin dihapus: "))
-        if 1 <= nomor <= len(tasks):
-            tasks.pop(nomor - 1)
+        choice = int(input("\nMasukkan nomor task yang ingin dihapus: "))
+        
+        # Validasi batas indeks agar tidak terjadi IndexError
+        if 1 <= choice <= len(tasks):
+            # Mutasi data: menghapus elemen dari list berdasarkan indeks
+            deleted = tasks.pop(choice - 1)
             
-            with open(DB_FILE, 'w') as file:
+            # Persistensi data: menulis ulang state terbaru ke file JSON
+            with open('tasks.json', 'w') as file:
                 json.dump(tasks, file, indent=4)
                 
-            print("Task berhasil dihapus.")
+            # Menggunakan key 'task' sesuai kesepakatan tim (Perbaikan Poin 1)
+            print(f"Task '{deleted.get('task')}' berhasil dihapus.")
         else:
-            print("Nomor task tidak ditemukan.")
+            print("Nomor task tidak valid. Data tidak ditemukan.")
     except ValueError:
-        print("Masukkan angka yang valid.")
+        # Menangani error jika pengguna memasukkan string/karakter selain angka
+        print("Input error: Tolong masukkan format angka yang benar.")
