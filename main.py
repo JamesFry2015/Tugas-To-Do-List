@@ -1,6 +1,7 @@
 import json
 import os
 from features.show_task import show_task
+from features.add_task import add_task
 
 # Konstanta untuk mendefinisikan lokasi file database.
 # Semua operasi baca/tulis data pada modul fitur harus mengacu pada file ini.
@@ -38,8 +39,8 @@ def main():
             # Memanggil fungsi show_task dari modul eksternal dan mempassing reference list tasks.
             show_task(tasks)
         elif choice == '2':
-            # TODO: Integrasikan fungsi dari modul Add Task
-            print("Fitur Add Task belum ditambahkan.")
+            # Memanggil fungsi add_task dari modul eksternal dan mempassing reference list tasks.
+            add_task(tasks)
         elif choice == '3':
             # TODO: Integrasikan fungsi dari modul Delete Task
             print("Fitur Delete Task belum ditambahkan.")
