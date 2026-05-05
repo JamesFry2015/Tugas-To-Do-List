@@ -4,6 +4,7 @@ from features.show_task import show_task
 from features.add_task import add_task
 from features.delete_task import delete_task
 from features.update_status import update_status
+from features.search_task import search_task
 
 # Konstanta untuk mendefinisikan lokasi file database.
 DB_FILE = 'tasks.json'
@@ -38,8 +39,7 @@ def main():
         elif choice == '4':
             update_status(tasks)
         elif choice == '5':
-            # TODO: Integrasikan fungsi dari modul Search Task
-            print("Fitur Search Task belum ditambahkan.")
+            search_task(tasks)
         elif choice == '6':
             print("Keluar dari program...")
             break
