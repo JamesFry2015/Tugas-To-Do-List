@@ -14,4 +14,5 @@ def show_task(tasks):
         status = "Selesai" if task.get('status') == 'done' else "Belum"
         
         # Mencetak data task dengan format: [ID]. [Status] Task Name (Assignee).
-        print(f"{idx}. [{status}] {task.get('name')} (Assignee: {task.get('assignee')})")
+        # Menggunakan key 'task' sesuai dengan struktur data yang disepakati tim pada database.
+        print(f"{idx}. [{status}] {task.get('task')} (Assignee: {task.get('assignee')})")
